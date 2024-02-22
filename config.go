@@ -50,7 +50,11 @@ func init() {
 		appConfig := make(map[string]string)
 		appConfig, err =ConfigFile.GetSection("app")
 
-		ROOT = appConfig["appPath"]
+		appPath, ok := appConfig["appPath"]
+		if !ok {
+			panic("can't find appPath")
+		}
+		ROOT = appPath
 
 		configRoot = ROOT + "/config/"
 
